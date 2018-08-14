@@ -8,8 +8,6 @@ class App extends Component {
       <div>
         <AppBar/>
         <WordCountPage/>
-          - Paper
-            - FilesSelectionFragment then FilesParsingFragment then HistogramFragment
       </div>
     );
   }
