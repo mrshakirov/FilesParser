@@ -21,7 +21,7 @@ const uploadButton = (props) => {
   return (
     <React.Fragment>
       <input type="file"
-             accept=".txt, text/plain
+             accept=".txt, text/plain,
              .zip, application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip"
              multiple
              style={{display: 'none'}}
