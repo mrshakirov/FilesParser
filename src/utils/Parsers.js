@@ -7,16 +7,23 @@ export const parseZipFile = async (file) => {
   const fileNames = Object.keys(zipFile.files)
 
   for (let i = 0; i < fileNames.length; i++) {
-    if (fileNames[i].split('.').pop() === 'zip') {
+    let fileName = fileNames[i]
+    if (fileName.split('.').pop() === 'zip') {
       // Inner .zip files are not parsed in this version of the app
       continue
-    } else if (fileNames[i].split('.').pop() !== 'txt') {
+    } else if (fileName.split('.').pop() !== 'txt') {
       // Non .txt files are not parsed in this version of the app
       continue
     }
 
-    const textFileContent = await zipFile.file(fileNames[i]).async('string')
-    textFiles.push({name: fileNames[i], content: textFileContent})
+    const textFileContent = await zipFile.file(fileName).async('string')
+
+    // Get only file name, without path
+    if (fileName.includes('/')) {
+      fileName = fileName.split('/').pop()
+    }
+
+    textFiles.push({name: fileName, content: textFileContent})
   }
 
   return textFiles
