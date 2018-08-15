@@ -40,15 +40,23 @@ class WordCountPage extends Component {
     const suitableFiles = this.getSuitableFiles(files)
 
     if (suitableFiles.length === 0) {
-      console.log('No suitable files selected!') // TODO: Implement warning message popup in the UI
+      this.props.showMessage('No suitable files found! *.txt and *.zip allowed only', 'error')
       this.setState({pageStatus: pageStatuses.FILES_SELECTION})
       return
     }
+
+    this.props.clearMessages()
 
     /**
      *  Asynchronously converting our files into {name: 'hello.txt', content: 'Hello, world!'} objects
      */
     let convertedFiles = await this.getConvertedFiles(suitableFiles)
+
+    if (convertedFiles.length === 0) {
+      this.props.showMessage('No suitable files found! *.txt allowed only', 'error')
+      this.setState({pageStatus: pageStatuses.FILES_SELECTION})
+      return
+    }
 
     /**
      *  Asynchronously parsing our files into {name: 'hello.txt', wordCount: 2} objects
@@ -70,6 +78,11 @@ class WordCountPage extends Component {
       suitableFiles.map(async (file) => {
         if (file.name.split('.').pop() === 'zip') {
           const files = await parseZipFile(file)
+
+          if (files.length === 0) {
+            this.props.showMessage(`No *.txt files found in ${(file.name)}`, 'warning')
+          }
+
           convertedFiles.push(...files)
         } else {
           const textFileContent = await parseTextFile(file)
