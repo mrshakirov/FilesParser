@@ -5,10 +5,10 @@ import AppBar from './SimpleAppBar'
 class App extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <AppBar/>
         <WordCountPage/>
-      </div>
+      </React.Fragment>
     );
   }
 }
