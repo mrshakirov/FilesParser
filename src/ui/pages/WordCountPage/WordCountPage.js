@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 
 import FilesSelectionFragment from './components/FilesSelectionFragment/FilesSelectionFragment'
+import FilesParsingFragment from './components/FilesParsingFragment/FilesParsingFragment'
 
 const styles = theme => ({
   paper: {
@@ -100,7 +101,7 @@ class WordCountPage extends Component {
         pageFragment = <FilesSelectionFragment parseFiles={this.parseFiles}/>
         break
       case pageStatuses.FILES_PARSING:
-        pageFragment = <div>FilesParsingFragment</div>
+        pageFragment = <FilesParsingFragment/>
         break
       case pageStatuses.HISTOGRAM_SHOW:
         pageFragment = <div>HistogramFragment</div>
