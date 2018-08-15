@@ -2,7 +2,7 @@
 
 This is a test challenge for an interview.
 
-It is a React app that parses text files and outputs a histogram of the word counts the files
+It is a React app that parses text files and outputs a histogram of the word counts in files
 
 ## How to run
 
