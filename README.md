@@ -1,4 +1,7 @@
 # Files Parser App
+<p align="center">
+  <img src="https://gdurl.com/1Ptw">
+</p>
 
 This is a test challenge for an interview
 
