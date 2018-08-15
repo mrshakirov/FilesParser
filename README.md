@@ -34,8 +34,9 @@ npm start
 
 ## How to use
 
-1. Select Directory (in some browsers it's only possible to select files)
-2. View the report based on passed files
+1. Select Directory (some browsers only provide possibility to select multiple files instead of the directory)
+2. View the report based on passed files (hover on histogram's bar to see detailed information — tooltip will appear)
+3. Click "CREATE ANOTHER REPORT" to go back to the files uploading
 
 ## Tests
 
@@ -47,3 +48,14 @@ npm test
 ## Browser support
 
 All modern browsers are supported (including IE11)
+
+## About tech stack
+
+Implementing this application i used:
+* **create-react-app** to bootstrap application
+* **material-ui** for UI
+* **core-js** for legacy browsers support
+* **jszip** for working with *.zip files
+* **recharts** for histogram implementation
+
+
