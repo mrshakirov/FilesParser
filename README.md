@@ -51,7 +51,7 @@ All modern browsers are supported (including IE11)
 
 ## About tech stack
 
-Implementing this application i used:
+Implementing this application I used:
 * **create-react-app** to bootstrap application
 * **material-ui** for UI
 * **core-js** for legacy browsers support
