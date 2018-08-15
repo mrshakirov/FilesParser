@@ -8,6 +8,10 @@ export const parseZipFile = async (file) => {
 
   for (let i = 0; i < fileNames.length; i++) {
     let fileName = fileNames[i]
+    if (fileName.includes('__MACOSX')) {
+      // Ignore Mac OS resource forks
+      continue
+    }
     if (fileName.split('.').pop() === 'zip') {
       // Inner .zip files are not parsed in this version of the app
       continue
