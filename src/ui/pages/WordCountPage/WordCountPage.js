@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import FilesSelectionFragment from './components/FilesSelectionFragment/FilesSelectionFragment'
 import FilesParsingFragment from './components/FilesParsingFragment/FilesParsingFragment'
+import HistogramFragment from './components/HistogramFragment/HistogramFragment'
 
 const styles = theme => ({
   paper: {
@@ -20,7 +21,9 @@ const styles = theme => ({
 
 class WordCountPage extends Component {
   state = {
-    pageStatus: pageStatuses.FILES_SELECTION
+    pageStatus: pageStatuses.FILES_SELECTION,
+    displayHistogram: false,
+    histogramData: []
   }
 
   parseFiles = async (event) => {
@@ -52,6 +55,7 @@ class WordCountPage extends Component {
      */
     let parsedFiles = await this.getParsedFiles(convertedFiles)
 
+    this.setState({displayHistogram: true, histogramData: parsedFiles})
     this.setState({pageStatus: pageStatuses.HISTOGRAM_SHOW})
   }
 
@@ -83,13 +87,20 @@ class WordCountPage extends Component {
       convertedFiles.map(async file => {
 
         const name = file.name
-        const wordCount = countWords(file)
+        const words = countWords(file)
 
-        parsedFiles.push({name: name, wordCount: wordCount})
+        parsedFiles.push({name: name, words: words})
       })
     )
 
     return parsedFiles
+  }
+
+  returnToFileSelection = () =>{
+    this.setState({
+      pageStatus: pageStatuses.FILES_SELECTION,
+      displayHistogram: false
+    })
   }
 
 
@@ -104,7 +115,9 @@ class WordCountPage extends Component {
         pageFragment = <FilesParsingFragment/>
         break
       case pageStatuses.HISTOGRAM_SHOW:
-        pageFragment = <div>HistogramFragment</div>
+        pageFragment = <HistogramFragment returnToFileSelection={this.returnToFileSelection}
+                                          displayHistogram={this.state.displayHistogram}
+                                          histogramData={this.state.histogramData}/>
         break
     }
 
