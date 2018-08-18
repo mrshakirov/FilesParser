@@ -79,11 +79,13 @@ class WordCountPage extends Component {
         if (file.name.split('.').pop() === 'zip') {
           const files = await parseZipFile(file)
 
-          if (files.length === 0) {
+          await this.parseInnerZips(files)
+
+          if (files.textFiles.length === 0) {
             this.props.showMessage(`No *.txt files found in ${(file.name)}`, 'warning')
           }
 
-          convertedFiles.push(...files)
+          convertedFiles.push(...files.textFiles)
         } else {
           const textFileContent = await parseTextFile(file)
           convertedFiles.push({name: file.name, content: textFileContent})
@@ -91,6 +93,22 @@ class WordCountPage extends Component {
       }))
 
     return convertedFiles
+  }
+
+  parseInnerZips = async (files) => {
+    while (files.innerZips.length !== 0){
+      let innerFiles = {textFiles: [], innerZips: []}
+      for (let i = 0; i < files.innerZips.length; i++) {
+        const tmpFiles = await parseZipFile(files.innerZips[i])
+        innerFiles.textFiles.push(...tmpFiles.textFiles)
+        innerFiles.innerZips.push(...tmpFiles.innerZips)
+      }
+
+      files.textFiles.push(...innerFiles.textFiles)
+
+      files.innerZips = []
+      files.innerZips.push(...innerFiles.innerZips)
+    }
   }
 
   getParsedFiles = async (convertedFiles) => {

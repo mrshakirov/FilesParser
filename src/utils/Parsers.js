@@ -2,35 +2,37 @@ import JsZip from 'jszip'
 
 export const parseZipFile = async (file) => {
   let textFiles = []
+  let innerZips = []
+  const fileData = file.data ? file.data : file
 
-  const zipFile = await new JsZip().loadAsync(file)
+  const zipFile = await new JsZip().loadAsync(fileData)
   const fileNames = Object.keys(zipFile.files)
 
   for (let i = 0; i < fileNames.length; i++) {
     let fileName = fileNames[i]
+    const fileExtension = fileName.split('.').pop()
+
     if (fileName.includes('__MACOSX')) {
       // Ignore Mac OS resource forks
       continue
     }
-    if (fileName.split('.').pop() === 'zip') {
-      // Inner .zip files are not parsed in this version of the app
-      continue
-    } else if (fileName.split('.').pop() !== 'txt') {
-      // Non .txt files are not parsed in this version of the app
-      continue
+
+    if (fileExtension === 'txt') {
+      const textFileContent = await zipFile.file(fileName).async('string')
+
+      // Get only file name, without path
+      if (fileName.includes('/')) {
+        fileName = fileName.split('/').pop()
+      }
+
+      textFiles.push({name: fileName, content: textFileContent})
+    } else if (fileExtension === 'zip') {
+      const data = await zipFile.file(fileName).async('blob')
+      innerZips.push({data})
     }
-
-    const textFileContent = await zipFile.file(fileName).async('string')
-
-    // Get only file name, without path
-    if (fileName.includes('/')) {
-      fileName = fileName.split('/').pop()
-    }
-
-    textFiles.push({name: fileName, content: textFileContent})
   }
 
-  return textFiles
+  return {textFiles, innerZips}
 }
 
 export const parseTextFile = (file) => {
