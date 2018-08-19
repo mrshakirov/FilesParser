@@ -29,7 +29,7 @@ const filesSelectionFragment = (props) => {
     <Grid className={props.classes.container} container justify='center' alignContent='center' direction='column'>
       <Grid item>
         <Typography variant='title' align='center' gutterBottom>
-          Upload your text files to get word count report
+          Upload your text files to get word frequency report
         </Typography>
         <Grid container justify='center'>
           {uploadButton}

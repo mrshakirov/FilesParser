@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { pageStatuses, allowedFileTypes } from '../../../utils/Enums'
-import { countWords, parseZipFile, parseTextFile } from '../../../utils/Parsers'
+import { getWordFrequency, parseZipFile, parseTextFile } from '../../../utils/Parsers'
 
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -61,9 +61,9 @@ class WordCountPage extends Component {
     /**
      *  Asynchronously parsing our files into {name: 'hello.txt', wordCount: 2} objects
      */
-    let parsedFiles = await this.getParsedFiles(convertedFiles)
+    let wordFrequency = await getWordFrequency(convertedFiles)
 
-    this.setState({displayHistogram: true, histogramData: parsedFiles})
+    this.setState({displayHistogram: true, histogramData: wordFrequency})
     this.setState({pageStatus: pageStatuses.HISTOGRAM_SHOW})
   }
 
@@ -109,22 +109,6 @@ class WordCountPage extends Component {
       files.innerZips = []
       files.innerZips.push(...innerFiles.innerZips)
     }
-  }
-
-  getParsedFiles = async (convertedFiles) => {
-    let parsedFiles = []
-
-    await Promise.all(
-      convertedFiles.map(async file => {
-
-        const name = file.name
-        const words = countWords(file)
-
-        parsedFiles.push({name: name, words: words})
-      })
-    )
-
-    return parsedFiles
   }
 
   returnToFileSelection = () =>{

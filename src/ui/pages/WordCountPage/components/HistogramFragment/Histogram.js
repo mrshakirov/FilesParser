@@ -14,10 +14,10 @@ const histogram = (props) => {
     <BarChart width={600} height={300} data={props.data}
               margin={{right: 30}}>
       <CartesianGrid strokeDasharray="3 3"/>
-      <XAxis dataKey="name"/>
+      <XAxis dataKey="word"/>
       <YAxis/>
       <Tooltip/>
-      <Bar dataKey="words" fill="#8884d8" />
+      <Bar dataKey="occurrences" fill="#8884d8" />
     </BarChart>
   )
 }
