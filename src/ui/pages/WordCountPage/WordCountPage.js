@@ -12,7 +12,7 @@ import HistogramFragment from './components/HistogramFragment/HistogramFragment'
 
 const styles = theme => ({
   paper: {
-    height: 400,
+    height: 430,
     marginTop: 16,
     marginLeft: 8,
     marginRight: 8
