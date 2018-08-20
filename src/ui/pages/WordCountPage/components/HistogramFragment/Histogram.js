@@ -20,7 +20,7 @@ const histogram = (props) => {
                         margin={{right: 30}}>
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis dataKey="word"/>
-                <YAxis/>
+                <YAxis allowDecimals={false}/>
                 <Tooltip/>
                 <Bar dataKey="occurrences" fill="#8884d8" />
               </BarChart>}
