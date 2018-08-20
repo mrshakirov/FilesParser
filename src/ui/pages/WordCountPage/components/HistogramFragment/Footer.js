@@ -10,12 +10,12 @@ const footer = (props) => {
       <Grid item >
         <Grid container  justify='flex-end' alignItems='center' style={{marginTop: 8}}>
           <Typography variant="caption">
-            {`1-5 of 15`}
+            {props.numeration}
           </Typography>
-          <IconButton component="span" disabled={false} style={{marginLeft: 16}}>
+          <IconButton component="span" disabled={false} style={{marginLeft: 16}} onClick={props.onPageBackClick}>
             <ArrowBack style={{fontSize: '16px'}}/>
           </IconButton >
-          <IconButton component="span" disabled={false} style={{marginRight: 16}}>
+          <IconButton component="span" disabled={false} style={{marginRight: 16}} onClick={props.onPageForwardClick}>
             <ArrowForward style={{fontSize: '16px'}}/>
           </IconButton>
         </Grid>
