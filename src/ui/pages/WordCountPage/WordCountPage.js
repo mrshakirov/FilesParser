@@ -122,6 +122,7 @@ class WordCountPage extends Component {
   render () {
     let pageFragment = null
 
+    // eslint-disable-next-line
     switch (this.state.pageStatus) {
       case pageStatuses.FILES_SELECTION:
         pageFragment = <FilesSelectionFragment parseFiles={this.parseFiles}/>
