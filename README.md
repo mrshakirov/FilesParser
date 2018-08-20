@@ -1,6 +1,6 @@
 # Files Parser App
 <p align="center">
-  <img src="https://gdurl.com/XpHl">
+  <img src="https://gdurl.com/7Uun">
 </p>
 <p align="center">
   <b><a href="https://sergvolynkin.github.io/FilesParser/">See This Application Live</a></b>
