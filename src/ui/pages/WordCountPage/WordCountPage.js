@@ -112,6 +112,7 @@ class WordCountPage extends Component {
   }
 
   returnToFileSelection = () =>{
+    this.props.clearMessages()
     this.setState({
       pageStatus: pageStatuses.FILES_SELECTION,
       displayHistogram: false
