@@ -1,6 +1,6 @@
 # Files Parser App
 <p align="center">
-  <img src="https://gdurl.com/1Ptw">
+  <img src="https://gdurl.com/XpHl">
 </p>
 <p align="center">
   <b><a href="https://sergvolynkin.github.io/FilesParser/">See This Application Live</a></b>
@@ -8,13 +8,14 @@
 
 This is a test challenge for an interview
 
-It is a React app that parses text files and outputs a histogram of the word counts in files
-```shell
+It is a React app that parses text files and outputs a histogram of the word frequency in files
+```text
 Note:
 — App fetches data from nested folders
 — App can parse *.txt files
 — *.txt files also can be extracted from *.zip archives automatically
 — *.txt files can be mixed with other files, app will ignore them
+— *.zip files can be nested in each other
 ```
 
 ## How to run
@@ -38,7 +39,9 @@ npm start
 ## How to use
 
 1. Select Directory (some browsers only provide possibility to select multiple files instead of the directory)
-2. View the report based on passed files (hover on histogram's bar to see detailed information — tooltip will appear)
+2. View the report based on passed files 
+   - Hover on histogram's bar to see detailed information — tooltip will appear
+   - Click arrows in right bottom corner to change pages of data
 3. Click "CREATE ANOTHER REPORT" to go back to the files uploading
 
 ## Tests
@@ -60,5 +63,3 @@ Implementing this application I used:
 * **core-js** for legacy browsers support
 * **jszip** for working with *.zip files
 * **recharts** for histogram implementation
-
-
